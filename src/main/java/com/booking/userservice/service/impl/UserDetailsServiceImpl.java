@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetailsDTO updateUser(String userName, UserDetailsDTO userDetailsDTO) {
         Optional<MongoUserDetails> mongoUserDetailsOptional = userDetailsRepository.findByUserName(userName);
         if (mongoUserDetailsOptional.isEmpty()) {
-            throw new CustomException(STR."No user present wit given username: \{userName}");
+            throw new CustomException(STR."No user present with given username: \{userName}");
         }
 
         MongoUserDetails mongoUserDetails = mongoUserDetailsOptional.get();
@@ -57,6 +57,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Optional<MongoUserDetails> mongoUserDetails = userDetailsRepository.findByUserName(userName);
         return mongoUserDetails.map(this::mapToDTO)
                 .orElse(null);
+    }
+
+    @Override
+    public String deactivateUser(String userName) {
+        Optional<MongoUserDetails> mongoUserDetails = userDetailsRepository.findByUserName(userName);
+        if (mongoUserDetails.isEmpty()) {
+            return STR."No user found with given name \{userName}";
+        } else {
+            userDetailsRepository.deactivateUser(userName);
+            return STR."User \{userName} deleted successfully";
+        }
     }
 
     private UserDetailsDTO mapToDTO(MongoUserDetails mongoUserDetails) {

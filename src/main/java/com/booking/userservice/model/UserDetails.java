@@ -19,6 +19,6 @@ public class UserDetails {
     private String emailId;
     private String phoneNumber;
     private LocalDate dateOfBirth;
-    private UserType userType;
+    private UserPlan userPlan;
     private boolean isActive = true;
 }

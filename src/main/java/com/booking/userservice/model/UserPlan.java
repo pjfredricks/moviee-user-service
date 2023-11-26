@@ -1,6 +1,6 @@
 package com.booking.userservice.model;
 
-public enum UserType {
+public enum UserPlan {
     FREE,
     STANDARD,
     PREMIUM

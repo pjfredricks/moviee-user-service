@@ -12,4 +12,6 @@ public interface UserDetailsService {
     List<UserDetailsDTO> getAllUsers();
 
     UserDetailsDTO getByUserName(String userName);
+
+    String deactivateUser(String userName);
 }
